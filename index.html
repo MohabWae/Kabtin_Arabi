@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kabtin Arabi</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #000000e0, #222222e0),
+                  url('background.jpg') center/cover no-repeat;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      background: rgba(0, 0, 0, 0.8);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(255, 215, 0, 0.7);
+      text-align: center;
+      width: 90%;
+      max-width: 450px;
+      position: relative;
+    }
+
+    /* اللوجو فوق يمين */
+    .logo {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid #FFD700;
+      object-fit: cover;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.7);
+      background: #fff;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      color: #FFD700;
+      text-shadow: 2px 2px 5px black;
+      font-weight: bold;
+    }
+
+    p {
+      color: #ddd;
+      font-size: 1.1em;
+      margin-bottom: 25px;
+      font-weight: bold;
+    }
+
+    button {
+      background: linear-gradient(45deg, #FFD700, #ffae00);
+      color: black;
+      font-weight: bold;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 10px;
+      cursor: pointer;
+      margin: 10px 0;
+      font-size: 1.1em;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      width: 80%;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #FFD700;
+    }
+
+    .contact {
+      margin-top: 30px;
+    }
+
+    .contact h3 {
+      color: #FFD700;
+      font-weight: bold;
+    }
+
+    .contact a {
+      color: #FFD700;
+      font-size: 1.1em;
+      font-weight: bold;
+      text-decoration: none;
+      display: inline-block;
+      margin: 8px;
+      transition: color 0.2s;
+    }
+
+    .contact a:hover {
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- لوجو (مع بديل لو مش لاقي الصورة) -->
+    <img src="logo.png" alt="Kabtin Logo" class="logo" onerror="this.src='https://via.placeholder.com/60x60.png?text=Logo';">
+
+    <h1>Kabtin Arabi</h1>
+    <p>Your gateway to fitness, discipline, and success.</p>
+
+    <!-- أزرار -->
+    <button onclick="goPrivate()">Private Access</button>
+    <button onclick="window.location.href='public.html'">Public Page</button>
+
+    <div class="contact">
+      <h3>Contact Captain</h3>
+      <a href="https://wa.me/01033667327" target="_blank">WhatsApp</a>
+      <a href="https://www.instagram.com/apo_keran?igsh=bWFsbW1uNnFpeTcy" target="_blank">Instagram</a>
+      <a href="https://www.tiktok.com/@apo_keran?_t=ZS-8zEEZHao3JI&_r=1" target="_blank">TikTok</a>
+      <a href="https://www.facebook.com/share/1M2Q6rDwiV/" target="_blank">Facebook</a>
+    </div>
+  </div>
+
+  <script>
+    function goPrivate() {
+      let code = prompt("Enter private access code:");
+      if (code === "1234") {
+        window.location.href = "private.html"; // الصفحة الخاصة
+      } else {
+        alert("❌ Wrong code! Access denied.");
+      }
+    }
+  </script>
+</body>
+</html>

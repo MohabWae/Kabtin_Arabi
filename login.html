@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login | Kabtin Arabi</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    body {
+      background: linear-gradient(-45deg, #000000, #1c1c1c, #323233, #4b4b4d);
+      background-size: 400% 400%;
+      animation: gradientBG 12s ease infinite;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .content-box {
+      background: rgba(20, 20, 20, 0.85);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+      padding: 40px 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 320px;
+      max-width: 380px;
+      position: relative;
+      border: 1px solid #FFD700;
+      backdrop-filter: blur(10px);
+    }
+
+    .logo {
+      position: absolute;
+      top: -30px;
+      right: calc(50% - 30px);
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid #FFD700;
+      object-fit: cover;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.7);
+      background: #fff;
+    }
+
+    .login-title {
+      font-size: 1.8em;
+      margin: 40px 0 20px;
+      font-weight: 600;
+      color: #FFD700;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+
+    .login-form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .login-form label {
+      align-self: flex-start;
+      margin-bottom: 5px;
+      font-size: 0.9em;
+      color: #ddd;
+    }
+
+    input[type="text"], input[type="password"] {
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid #FFD700;
+      background: #1e1e1e;
+      color: #fff;
+      width: 100%;
+      margin-bottom: 18px;
+      font-size: 1em;
+      transition: all 0.3s ease;
+    }
+
+    input:focus {
+      border-color: #FFD700;
+      outline: none;
+      box-shadow: 0 0 12px #FFD700;
+    }
+
+    button {
+      padding: 12px 18px;
+      border-radius: 12px;
+      border: none;
+      background: linear-gradient(90deg, #FFD700, #ffcc00);
+      color: #000;
+      cursor: pointer;
+      width: 100%;
+      font-weight: bold;
+      font-size: 1.05em;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(255,215,0,0.4);
+    }
+
+    button:hover {
+      background: linear-gradient(90deg, #ffea65, #FFD700);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(255,215,0,0.6);
+    }
+  </style>
+</head>
+<body>
+  <div class="content-box">
+    <!-- اللوجو -->
+    <img src="logo.png" alt="Logo" class="logo">
+
+    <div class="login-title">Login</div>
+
+    <form class="login-form">
+      <label for="username">Username</label>
+      <input type="text" id="username" placeholder="Enter your username" required>
+      
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="Enter your password" required>
+      
+      <button type="submit">Login</button>
+    </form>
+  </div>
+
+  <script>
+    const form = document.querySelector('.login-form');
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      window.location.href = 'index.html'; 
+    });
+  </script>
+</body>
+</html>

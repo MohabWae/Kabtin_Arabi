@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Private - Kabtin</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #111, #222);
+      color: #fff;
+      padding: 20px;
+      margin: 0;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header img {
+      width: 80px;
+    }
+    h1 {
+      color: gold;
+      font-weight: bold;
+    }
+    input, textarea {
+      display: block;
+      margin: 15px auto;
+      padding: 12px;
+      width: 85%;
+      border-radius: 12px;
+      border: none;
+      background: #333;
+      color: #fff;
+      font-size: 14px;
+      font-weight: bold;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      transition: 0.3s;
+    }
+    input:focus, textarea:focus {
+      outline: none;
+      background: #444;
+      transform: scale(1.02);
+    }
+    button {
+      padding: 12px 25px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      background: gold;
+      color: #111;
+      font-weight: bold;
+      font-size: 15px;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: orange;
+      transform: scale(1.05);
+    }
+    #preview {
+      margin-top: 25px;
+      padding: 20px;
+      background: #1a1a1a;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+      text-align: left;
+    }
+    #preview h3 {
+      color: limegreen;
+      font-weight: bold;
+    }
+    img {
+      max-width: 150px;
+      border-radius: 12px;
+      margin-top: 10px;
+      border: 2px solid gold;
+    }
+    label {
+      display: block;
+      text-align: left;
+      width: 85%;
+      margin: 0 auto 5px;
+      font-weight: bold;
+      color: gold;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Private Dashboard</h1>
+    <img src="logo.png" alt="Logo"> <!-- غيّر اللوجو -->
+  </header>
+
+  <h3>إضافة بيانات عميل</h3>
+
+  <label>الاسم:</label>
+  <input type="text" id="name" placeholder="اكتب اسم العميل">
+
+  <label>النظام الغذائي:</label>
+  <textarea id="diet" placeholder="اكتب الدايت هنا"></textarea>
+
+  <label>المكملات:</label>
+  <textarea id="supplements" placeholder="اكتب المكملات هنا"></textarea>
+
+  <label>صورة العميل:</label>
+  <input type="file" id="photo">
+
+  <button onclick="saveData()">💾 حفظ البيانات</button>
+
+  <div id="preview"></div>
+
+  <script>
+    function saveData() {
+      let name = document.getElementById("name").value;
+      let diet = document.getElementById("diet").value;
+      let supplements = document.getElementById("supplements").value;
+      let photo = document.getElementById("photo").files[0];
+
+      let reader = new FileReader();
+      reader.onload = function(e) {
+        let data = {
+          name: name,
+          diet: diet,
+          supplements: supplements,
+          photo: e.target.result
+        };
+        localStorage.setItem("clientData", JSON.stringify(data));
+        showData();
+      }
+      if (photo) {
+        reader.readAsDataURL(photo);
+      } else {
+        let data = {
+          name: name,
+          diet: diet,
+          supplements: supplements,
+          photo: ""
+        };
+        localStorage.setItem("clientData", JSON.stringify(data));
+        showData();
+      }
+    }
+
+    function showData() {
+      let data = JSON.parse(localStorage.getItem("clientData"));
+      if (data) {
+        document.getElementById("preview").innerHTML = `
+          <h3>✅ تم الحفظ</h3>
+          <p><b>👤 الاسم:</b> ${data.name}</p>
+          <p><b>🍽 الدايت:</b> ${data.diet}</p>
+          <p><b>💊 المكملات:</b> ${data.supplements}</p>
+          ${data.photo ? `<img src="${data.photo}" alt="صورة العميل">` : ""}
+        `;
+      }
+    }
+
+    showData();
+  </script>
+</body>
+</html>

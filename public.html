@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Public - Kabtin</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #111, #222);
+      color: #fff;
+      padding: 20px;
+      margin: 0;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header img {
+      width: 80px;
+    }
+    h1 {
+      color: gold;
+      font-weight: bold;
+    }
+    label {
+      display: block;
+      text-align: left;
+      width: 85%;
+      margin: 0 auto 5px;
+      font-weight: bold;
+      color: gold;
+    }
+    textarea {
+      display: block;
+      margin: 15px auto;
+      padding: 12px;
+      width: 85%;
+      border-radius: 12px;
+      border: none;
+      background: #333;
+      color: #fff;
+      font-size: 14px;
+      font-weight: bold;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      transition: 0.3s;
+      min-height: 120px;
+    }
+    textarea:focus {
+      outline: none;
+      background: #444;
+      transform: scale(1.02);
+    }
+    button {
+      padding: 12px 25px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      background: gold;
+      color: #111;
+      font-weight: bold;
+      font-size: 15px;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: orange;
+      transform: scale(1.05);
+    }
+    #publicPreview {
+      margin-top: 25px;
+      padding: 20px;
+      background: #1a1a1a;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+      text-align: left;
+    }
+    #publicPreview h3 {
+      color: limegreen;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Public Page</h1>
+    <img src="logo.png" alt="Logo"> <!-- غير اللوجو -->
+  </header>
+
+  <h3>إضافة النظام الموحد</h3>
+
+  <label>النظام الغذائي الموحد:</label>
+  <textarea id="publicDiet" placeholder="اكتب الدايت هنا..."></textarea>
+
+  <label>التمارين الموحدة:</label>
+  <textarea id="publicWorkout" placeholder="اكتب التمارين هنا..."></textarea>
+
+  <button onclick="savePublicData()">💾 حفظ للنظام الموحد</button>
+
+  <div id="publicPreview"></div>
+
+  <script>
+    function savePublicData() {
+      let diet = document.getElementById("publicDiet").value;
+      let workout = document.getElementById("publicWorkout").value;
+
+      let publicData = {
+        diet: diet,
+        workout: workout
+      };
+
+      localStorage.setItem("publicData", JSON.stringify(publicData));
+      showPublicData();
+    }
+
+    function showPublicData() {
+      let data = JSON.parse(localStorage.getItem("publicData"));
+      if (data) {
+        document.getElementById("publicPreview").innerHTML = `
+          <h3>📌 النظام الموحد</h3>
+          <p><b>🍽 الدايت:</b> ${data.diet}</p>
+          <p><b>🏋️‍♂️ التمارين:</b> ${data.workout}</p>
+        `;
+      }
+    }
+
+    showPublicData();
+  </script>
+</body>
+</html>
