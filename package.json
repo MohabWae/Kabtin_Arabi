@@ -1,0 +1,28 @@
+{
+  "name": "gym-website",
+  "version": "1.0.0",
+  "description": "A gym website featuring user registration, exercise schedules, nutrition information, and contact options.",
+  "main": "src/js/main.js",
+  "scripts": {
+    "start": "live-server public",
+    "build": "echo 'Build step not defined'",
+    "test": "echo 'No tests specified'"
+  },
+  "keywords": [
+    "gym",
+    "fitness",
+    "registration",
+    "nutrition",
+    "schedule"
+  ],
+  "author": "Your Name",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "body-parser": "^1.19.0",
+    "multer": "^1.4.2"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.1"
+  }
+}

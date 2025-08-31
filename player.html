@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Players List</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: url('logo.png') center center/cover no-repeat;
+      font-family: Arial, sans-serif;
+      color: #FFD700;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 20px;
+    }
+    .container {
+      background: rgba(0,0,0,0.7);
+      padding: 20px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 600px;
+    }
+    h1 {
+      text-align: center;
+      color: #FFD700;
+    }
+    .player {
+      background: rgba(255,255,255,0.1);
+      margin-bottom: 15px;
+      padding: 15px;
+      border-radius: 10px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .player img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      margin-right: 15px;
+    }
+    .info {
+      flex: 1;
+    }
+    button {
+      background: #FFD700;
+      color: #000;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .diet-box {
+      display: none;
+      margin-top: 10px;
+      background: rgba(0,0,0,0.6);
+      padding: 10px;
+      border-radius: 5px;
+      color: #FFD700;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Players</h1>
+    <div id="playersList"></div>
+  </div>
+
+  <script>
+    const playersList = document.getElementById('playersList');
+    let players = JSON.parse(localStorage.getItem('players')) || [];
+
+    function renderPlayers() {
+      playersList.innerHTML = '';
+      players.forEach((player, idx) => {
+        const div = document.createElement('div');
+        div.className = 'player';
+        div.innerHTML = `
+          <img src="${player.photoURL || 'https://via.placeholder.com/60'}" alt="${player.name}">
+          <div class="info">
+            <strong>${player.name}</strong>
+            <div class="diet-box" id="diet-${idx}">Diet: ${player.diet || 'N/A'}</div>
+          </div>
+          <button onclick="toggleDiet(${idx})">عرض النظام</button>
+        `;
+        playersList.appendChild(div);
+      });
+    }
+
+    function toggleDiet(idx) {
+      const box = document.getElementById('diet-' + idx);
+      box.style.display = box.style.display === 'block' ? 'none' : 'block';
+    }
+
+    renderPlayers();
+  </script>
+</body>
+</html>
