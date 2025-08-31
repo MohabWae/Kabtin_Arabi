@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>👤 صفحة العميل</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #000, #1a1a1a, #000);
+      color: #FFD700;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .client-page {
+      background: rgba(0,0,0,0.9);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 35px rgba(255,215,0,0.7);
+      width: 95%;
+      max-width: 600px;
+      text-align: center;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: scale(0.9);}
+      to {opacity: 1; transform: scale(1);}
+    }
+    h1 { margin-bottom: 20px; text-shadow: 0 0 15px #FFD700; }
+    input {
+      width: 80%;
+      padding: 12px;
+      margin: 15px auto;
+      border-radius: 12px;
+      border: none;
+      background: #222;
+      color: white;
+      font-weight: bold;
+      display: block;
+    }
+    button {
+      padding: 12px 25px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      background: linear-gradient(45deg, #FFD700, #ffae00);
+      margin-top: 10px;
+      transition: 0.3s;
+    }
+    button:hover { transform: scale(1.05); }
+    .hidden { display: none; }
+    .info {
+      text-align: right;
+      margin-top: 20px;
+    }
+    img {
+      max-width: 100%;
+      border-radius: 15px;
+      margin-top: 15px;
+      border: 2px solid gold;
+    }
+  </style>
+</head>
+<body>
+  <div class="client-page">
+    <h1>👤 صفحة العميل</h1>
+
+    <div id="loginBox">
+      <p>من فضلك ادخل الكود السري للوصول لبياناتك:</p>
+      <input type="password" id="passwordInput" placeholder="الكود السري">
+      <button onclick="checkPassword()">🔑 دخول</button>
+    </div>
+
+    <div id="clientData" class="hidden">
+      <h2 id="clientName"></h2>
+      <img id="clientPhoto" alt="صورة العميل">
+      <div class="info">
+        <p><strong>النظام الغذائي:</strong><br><span id="diet"></span></p>
+        <p><strong>المكملات:</strong><br><span id="supplements"></span></p>
+        <p><strong>التمارين:</strong><br><span id="exercises"></span></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // قراءة ID من اللينك
+    const urlParams = new URLSearchParams(window.location.search);
+    const clientId = urlParams.get("id");
+
+    // تحميل بيانات العملاء من localStorage
+    const clients = JSON.parse(localStorage.getItem("clients")) || [];
+    const client = clients.find(c => c.id == clientId);
+
+    function checkPassword() {
+      const pass = document.getElementById("passwordInput").value.trim();
+      if (!client) {
+        alert("❌ العميل غير موجود");
+        return;
+      }
+      if (pass === client.password) {
+        // عرض البيانات
+        document.getElementById("loginBox").classList.add("hidden");
+        document.getElementById("clientData").classList.remove("hidden");
+        document.getElementById("clientName").innerText = "👤 " + client.name;
+        document.getElementById("diet").innerText = client.diet || "لا يوجد";
+        document.getElementById("supplements").innerText = client.supplements || "لا يوجد";
+        document.getElementById("exercises").innerText = client.exercises || "لا يوجد";
+        if (client.photo) document.getElementById("clientPhoto").src = client.photo;
+      } else {
+        alert("❌ الكود السري غير صحيح");
+      }
+    }
+  </script>
+</body>
+</html>

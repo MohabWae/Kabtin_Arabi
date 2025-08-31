@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>📋 لوحة الكابتن</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #000, #1a1a1a, #000);
+      color: #FFD700;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .dashboard {
+      background: rgba(0,0,0,0.9);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 35px rgba(255,215,0,0.7);
+      width: 95%;
+      max-width: 800px;
+      text-align: center;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: scale(0.9);}
+      to {opacity: 1; transform: scale(1);}
+    }
+    h1 { margin-bottom: 20px; text-shadow: 0 0 15px #FFD700; }
+    label {
+      display: block;
+      text-align: right;
+      margin: 10px auto 5px;
+      width: 85%;
+      font-weight: bold;
+      color: #FFD700;
+    }
+    input, textarea {
+      width: 85%;
+      padding: 12px;
+      margin: 5px auto 15px;
+      border-radius: 12px;
+      border: none;
+      background: #222;
+      color: white;
+      font-weight: bold;
+      display: block;
+    }
+    button {
+      padding: 12px 25px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      background: linear-gradient(45deg, #FFD700, #ffae00);
+      margin-top: 10px;
+      transition: 0.3s;
+    }
+    button:hover { transform: scale(1.05); }
+    #clientsList {
+      margin-top: 30px;
+      background: #111;
+      padding: 15px;
+      border-radius: 15px;
+    }
+    #clientsList a {
+      display: block;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid gold;
+      border-radius: 10px;
+      color: cyan;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+    #clientsList a:hover { background: gold; color: black; }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <h1>📋 لوحة الكابتن</h1>
+
+    <label>اسم العميل:</label>
+    <input type="text" id="name" placeholder="اكتب اسم العميل">
+
+    <label>الكود الخاص بالعميل:</label>
+    <input type="password" id="password" placeholder="الكود السري">
+
+    <label>النظام الغذائي:</label>
+    <textarea id="diet"></textarea>
+
+    <label>المكملات:</label>
+    <textarea id="supplements"></textarea>
+
+    <label>التمارين:</label>
+    <textarea id="exercises"></textarea>
+
+    <label>صورة العميل:</label>
+    <input type="file" id="photo" accept="image/*">
+
+    <button onclick="saveData()">💾 حفظ العميل</button>
+
+    <div id="clientsList">
+      <h3>👥 قائمة العملاء</h3>
+      <div id="list"></div>
+    </div>
+  </div>
+
+  <script>
+    function saveData() {
+      let name = document.getElementById("name").value.trim();
+      let password = document.getElementById("password").value.trim();
+      let diet = document.getElementById("diet").value.trim();
+      let supplements = document.getElementById("supplements").value.trim();
+      let exercises = document.getElementById("exercises").value.trim();
+      let photo = document.getElementById("photo").files[0];
+
+      if (!name || !password) {
+        alert("❌ لازم تكتب الاسم والكود");
+        return;
+      }
+
+      let reader = new FileReader();
+      reader.onload = function(e) {
+        let clients = JSON.parse(localStorage.getItem("clients")) || [];
+        clients.push({
+          id: Date.now(),
+          name, password, diet, supplements, exercises,
+          photo: e.target.result || ""
+        });
+        localStorage.setItem("clients", JSON.stringify(clients));
+        showClients();
+      };
+      if (photo) reader.readAsDataURL(photo);
+      else {
+        let clients = JSON.parse(localStorage.getItem("clients")) || [];
+        clients.push({ id: Date.now(), name, password, diet, supplements, exercises, photo:"" });
+        localStorage.setItem("clients", JSON.stringify(clients));
+        showClients();
+      }
+    }
+
+    function showClients() {
+      let clients = JSON.parse(localStorage.getItem("clients")) || [];
+      let listDiv = document.getElementById("list");
+      listDiv.innerHTML = "";
+      clients.forEach(c => {
+        listDiv.innerHTML += `<a href="client.html?id=${c.id}">👤 ${c.name}</a>`;
+      });
+    }
+    showClients();
+  </script>
+</body>
+</html>

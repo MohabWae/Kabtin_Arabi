@@ -4,57 +4,108 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kabtin Arabi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to right, #000000e0, #222222e0),
-                  url('background.jpg') center/cover no-repeat;
-      color: #fff;
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
+      overflow: hidden;
+      background: linear-gradient(270deg, #ff416c, #ff4b2b, #1e3c72, #2a5298);
+      background-size: 800% 800%;
+      animation: gradientMove 15s ease infinite;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     .container {
-      background: rgba(0, 0, 0, 0.8);
+      background: rgba(255, 255, 255, 0.15);
       padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 0 25px rgba(255, 215, 0, 0.7);
+      border-radius: 25px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.5);
       text-align: center;
       width: 90%;
-      max-width: 450px;
+      max-width: 480px;
+      backdrop-filter: blur(15px);
+      animation: fadeInUp 1.2s ease;
       position: relative;
+      overflow: hidden;
     }
 
-    /* اللوجو فوق يمين */
-    .logo {
+    .container::before {
+      content: "";
       position: absolute;
-      top: 20px;
-      right: 20px;
-      width: 60px;
-      height: 60px;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(from 180deg, #ff416c, #ff4b2b, #FFD700, #1e3c72, #2a5298, #ff416c);
+      animation: rotate 8s linear infinite;
+      z-index: -1;
+    }
+
+    .container::after {
+      content: "";
+      position: absolute;
+      inset: 3px;
+      border-radius: 22px;
+      background: rgba(0,0,0,0.6);
+      z-index: -1;
+      backdrop-filter: blur(12px);
+    }
+
+    @keyframes rotate {
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .logo {
+      width: 90px;
+      height: 90px;
       border-radius: 50%;
-      border: 2px solid #FFD700;
+      border: 3px solid #FFD700;
       object-fit: cover;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.7);
-      background: #fff;
+      margin-bottom: 20px;
+      animation: pulse 2s infinite;
+      background: white;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); box-shadow: 0 0 0 rgba(255,215,0, 0.7); }
+      70% { transform: scale(1.1); box-shadow: 0 0 30px rgba(255,215,0, 0.9); }
+      100% { transform: scale(1); box-shadow: 0 0 0 rgba(255,215,0, 0); }
     }
 
     h1 {
       font-size: 2.5em;
-      margin-bottom: 10px;
+      margin: 10px 0;
       color: #FFD700;
-      text-shadow: 2px 2px 5px black;
-      font-weight: bold;
+      text-shadow: 0 0 15px rgba(255,215,0,0.8);
+      animation: fadeIn 1.2s ease;
     }
 
     p {
-      color: #ddd;
+      color: #f5f5f5;
       font-size: 1.1em;
-      margin-bottom: 25px;
-      font-weight: bold;
+      margin-bottom: 30px;
+      font-weight: 500;
+      animation: fadeIn 1.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     button {
@@ -62,70 +113,73 @@
       color: black;
       font-weight: bold;
       border: none;
-      padding: 12px 25px;
-      border-radius: 10px;
+      padding: 14px 30px;
+      border-radius: 12px;
       cursor: pointer;
-      margin: 10px 0;
+      margin: 12px 0;
       font-size: 1.1em;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      width: 80%;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      width: 85%;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
     }
 
     button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 15px #FFD700;
+      transform: scale(1.1);
+      box-shadow: 0 0 30px rgba(255, 215, 0, 1);
     }
 
     .contact {
       margin-top: 30px;
+      animation: fadeIn 2s ease;
     }
 
     .contact h3 {
       color: #FFD700;
-      font-weight: bold;
+      margin-bottom: 15px;
+      font-weight: 700;
+      text-shadow: 0 0 10px rgba(255,215,0,0.8);
     }
 
     .contact a {
       color: #FFD700;
       font-size: 1.1em;
-      font-weight: bold;
+      font-weight: 600;
       text-decoration: none;
       display: inline-block;
-      margin: 8px;
-      transition: color 0.2s;
+      margin: 6px 10px;
+      transition: color 0.2s, transform 0.2s;
     }
 
     .contact a:hover {
-      color: white;
+      color: #fff;
+      transform: scale(1.15);
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <!-- لوجو (مع بديل لو مش لاقي الصورة) -->
-    <img src="logo.png" alt="Kabtin Logo" class="logo" onerror="this.src='https://via.placeholder.com/60x60.png?text=Logo';">
-
+    <img src="logo.png" alt="Kabtin Logo" class="logo" onerror="this.src='https://via.placeholder.com/80x80.png?text=Logo';">
     <h1>Kabtin Arabi</h1>
     <p>Your gateway to fitness, discipline, and success.</p>
 
-    <!-- أزرار -->
     <button onclick="goPrivate()">Private Access</button>
     <button onclick="window.location.href='public.html'">Public Page</button>
+    <button onclick="window.location.href='products.html'">🛒 Supplements & Proteins</button>
 
     <div class="contact">
       <h3>Contact Captain</h3>
       <a href="https://wa.me/01033667327" target="_blank">WhatsApp</a>
-      <a href="https://www.instagram.com/apo_keran?igsh=bWFsbW1uNnFpeTcy" target="_blank">Instagram</a>
-      <a href="https://www.tiktok.com/@apo_keran?_t=ZS-8zEEZHao3JI&_r=1" target="_blank">TikTok</a>
+      <a href="https://www.instagram.com/apo_keran" target="_blank">Instagram</a>
+      <a href="https://www.tiktok.com/@apo_keran" target="_blank">TikTok</a>
       <a href="https://www.facebook.com/share/1M2Q6rDwiV/" target="_blank">Facebook</a>
     </div>
   </div>
 
   <script>
     function goPrivate() {
-      let code = prompt("Enter private access code:");
+      let code = prompt("🔑 Enter private access code:");
       if (code === "1234") {
-        window.location.href = "private.html"; // الصفحة الخاصة
+        window.location.href = "private.html";
       } else {
         alert("❌ Wrong code! Access denied.");
       }

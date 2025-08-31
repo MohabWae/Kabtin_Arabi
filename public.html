@@ -1,114 +1,187 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Public - Kabtin</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #111, #222);
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
       color: #fff;
-      padding: 20px;
       margin: 0;
+      padding: 0;
     }
+
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 15px 25px;
+      background: #111;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
     header img {
-      width: 80px;
+      width: 60px;
     }
-    h1 {
+    header h1 {
       color: gold;
+      font-size: 26px;
       font-weight: bold;
     }
+
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      color: gold;
+      margin-bottom: 35px;
+      font-size: 26px;
+      letter-spacing: 1px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      background: #1c1c1c;
+      border-radius: 18px;
+      padding: 20px;
+      min-height: 220px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.5);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.7);
+    }
+
     label {
-      display: block;
-      text-align: left;
-      width: 85%;
-      margin: 0 auto 5px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
       font-weight: bold;
-      color: gold;
+      color: #ffcc00;
+      font-size: 16px;
     }
+
+    .icon {
+      width: 22px;
+      margin-right: 8px;
+    }
+
     textarea {
-      display: block;
-      margin: 15px auto;
-      padding: 12px;
-      width: 85%;
-      border-radius: 12px;
+      width: 100%;
       border: none;
-      background: #333;
+      border-radius: 14px;
+      padding: 14px;
+      font-size: 15px;
+      background: #2a2a2a;
       color: #fff;
-      font-size: 14px;
-      font-weight: bold;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-      transition: 0.3s;
       min-height: 120px;
+      resize: none;
+      transition: 0.3s;
     }
     textarea:focus {
-      outline: none;
-      background: #444;
-      transform: scale(1.02);
+      background: #333;
+      outline: 2px solid gold;
     }
+
     button {
-      padding: 12px 25px;
+      display: block;
+      margin: 35px auto;
+      padding: 15px 40px;
+      font-size: 17px;
       border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      background: gold;
-      color: #111;
+      border-radius: 14px;
       font-weight: bold;
-      font-size: 15px;
+      cursor: pointer;
+      background: linear-gradient(45deg, gold, orange);
+      color: #111;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
       transition: 0.3s;
     }
     button:hover {
-      background: orange;
-      transform: scale(1.05);
+      transform: scale(1.1);
+      background: linear-gradient(45deg, orange, gold);
     }
+
     #publicPreview {
-      margin-top: 25px;
-      padding: 20px;
-      background: #1a1a1a;
-      border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+      margin-top: 40px;
+      padding: 25px;
+      background: #111;
+      border-radius: 18px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.6);
       text-align: left;
+      animation: fadeIn 0.6s ease-in-out;
     }
     #publicPreview h3 {
       color: limegreen;
-      font-weight: bold;
+      margin-bottom: 20px;
+      font-size: 22px;
+    }
+    #publicPreview p {
+      font-size: 16px;
+      line-height: 1.6;
+      background: #1e1e1e;
+      padding: 14px;
+      border-radius: 10px;
+      margin: 12px 0;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(15px);}
+      to {opacity: 1; transform: translateY(0);}
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Public Page</h1>
-    <img src="logo.png" alt="Logo"> <!-- غير اللوجو -->
+    <h1>📢 Public Page</h1>
+    <img src="logo.png" alt="Logo">
   </header>
 
-  <h3>إضافة النظام الموحد</h3>
+  <div class="container">
+    <h2>✍️ إضافة النظام الموحد</h2>
 
-  <label>النظام الغذائي الموحد:</label>
-  <textarea id="publicDiet" placeholder="اكتب الدايت هنا..."></textarea>
+    <div class="cards">
+      <div class="card">
+        <label><img src="https://img.icons8.com/emoji/48/000000/green-salad.png" class="icon"/> النظام الغذائي الموحد:</label>
+        <textarea id="publicDiet" placeholder="اكتب الدايت هنا..."></textarea>
+      </div>
 
-  <label>التمارين الموحدة:</label>
-  <textarea id="publicWorkout" placeholder="اكتب التمارين هنا..."></textarea>
+      <div class="card">
+        <label><img src="https://img.icons8.com/emoji/48/000000/person-lifting-weights.png" class="icon"/> التمارين الموحدة:</label>
+        <textarea id="publicWorkout" placeholder="اكتب التمارين هنا..."></textarea>
+      </div>
+    </div>
 
-  <button onclick="savePublicData()">💾 حفظ للنظام الموحد</button>
+    <button onclick="savePublicData()">💾 حفظ للنظام الموحد</button>
 
-  <div id="publicPreview"></div>
+    <div id="publicPreview"></div>
+  </div>
 
   <script>
     function savePublicData() {
-      let diet = document.getElementById("publicDiet").value;
-      let workout = document.getElementById("publicWorkout").value;
+      let diet = document.getElementById("publicDiet").value.trim();
+      let workout = document.getElementById("publicWorkout").value.trim();
 
-      let publicData = {
-        diet: diet,
-        workout: workout
-      };
+      if (diet === "" && workout === "") {
+        alert("⚠️ من فضلك اكتب الدايت أو التمارين أولاً!");
+        return;
+      }
 
+      let publicData = { diet: diet, workout: workout };
       localStorage.setItem("publicData", JSON.stringify(publicData));
       showPublicData();
     }
@@ -118,12 +191,11 @@
       if (data) {
         document.getElementById("publicPreview").innerHTML = `
           <h3>📌 النظام الموحد</h3>
-          <p><b>🍽 الدايت:</b> ${data.diet}</p>
-          <p><b>🏋️‍♂️ التمارين:</b> ${data.workout}</p>
+          <p><b>🍽 الدايت:</b> ${data.diet || "لا يوجد"}</p>
+          <p><b>🏋️‍♂️ التمارين:</b> ${data.workout || "لا يوجد"}</p>
         `;
       }
     }
-
     showPublicData();
   </script>
 </body>
